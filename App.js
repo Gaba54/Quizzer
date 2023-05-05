@@ -8,6 +8,8 @@ const App = () => {
   return (
     <View style={styles.containter}>
       <Home />
+      {/* <Quiz/> */}
+      {/* <Result/> */}
     </View>
   );
 };

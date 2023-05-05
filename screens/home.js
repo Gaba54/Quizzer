@@ -17,8 +17,11 @@ const Home = () => {
       style= {styles.banner}
       resizeMode='contain'/>
       </View>
+      <View>
+        <Text>Wpisz swoje imię, aby zacząć przygodę z quizami!</Text>
+      </View>
       <TouchableOpacity>
-        <Text>Start</Text>
+        <Text>Rozpocznij</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,19 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const Result = () => {
+const CategoriesDescription = () => {
   return (
     <View>
       <View>
-        <Text>Result</Text>
-      </View>
-      <View>
-        <Text>Result</Text>
+        <Text>CategoriesDescription</Text>
       </View>
     </View>
   );
 };
 
-export default Result;
+export default CategoriesDescription;
 
 const styles = StyleSheet.create({});
