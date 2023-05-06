@@ -1,39 +1,59 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useEffect} from 'react';
+import {useState} from 'react';
 
 const Quiz = ({navigation}) => {
+  const [questions, setQuestions] = useState();
+  const [ques, setQues] = useState(0);
+  const getQuiz = async () => {
+    const url = 'https://opentdb.com/api.php?amount=10&type=multiple';
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data.results[0]);
+    setQuestions(data.results);
+  };
+  useEffect(() => {
+    getQuiz();
+  }, []);
   return (
     <View style={styles.container}>
-      <View style={styles.questionCounter}>
-      <Text style={styles.question}>Pytanie X</Text>
-      </View>
-      <View style={styles.top}>
-        <Text style={styles.question}>
-          Jakiego koloru jest czerwony maluch?
-        </Text>
-      </View>
-      <View style={styles.options}>
-        <TouchableOpacity style={styles.optionButton}>
-          <Text style={styles.option}>Niebieski</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.optionButton}>
-          <Text style={styles.option}>Zielony</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.optionButton}>
-          <Text style={styles.option}>Czerwony</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.bottom}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>POMIŃ</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>ZAKOŃCZ</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Result')}>
-          <Text style={styles.buttonText}>NASTĘPNY</Text>
-        </TouchableOpacity>
-      </View>
+      {questions && (
+        <View style={styles.parent}>
+          <View style={styles.questionCounter}>
+            <Text style={styles.question}>Pytanie X</Text>
+          </View>
+          <View style={styles.top}>
+            <Text style={styles.question}>
+              Jakiego koloru jest czerwony maluch?
+            </Text>
+          </View>
+          <View style={styles.options}>
+            <TouchableOpacity style={styles.optionButton}>
+              <Text style={styles.option}>Niebieski</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.optionButton}>
+              <Text style={styles.option}>Zielony</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.optionButton}>
+              <Text style={styles.option}>Czerwony</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.bottom}>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>POMIŃ</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>ZAKOŃCZ</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Result')}>
+              <Text style={styles.buttonText}>NASTĘPNY</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -54,11 +74,10 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 16,
     alignItems: 'center',
-    marginTop:40,
+    marginTop: 40,
   },
   options: {
     marginVertical: 16,
-
   },
   bottom: {
     marginBottom: 12,
@@ -99,21 +118,23 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#4D4D4D',
   },
-  option:{
-    fontSize:18,
+  option: {
+    fontSize: 18,
     fontWeight: '500',
     color: '#4D4D4D',
-
   },
-  options:{
-    flex:1,
-    marginVertical:16,
+  options: {
+    flex: 1,
+    marginVertical: 16,
   },
-  optionButton:{
-    paddingVertical:12,
+  optionButton: {
+    paddingVertical: 12,
     marginVertical: 6,
     backgroundColor: '#a2d2ff',
     paddingHorizontal: 12,
-    borderRadius:12
-  }
+    borderRadius: 12,
+  },
+  parent: {
+    height: '100%',
+  },
 });
