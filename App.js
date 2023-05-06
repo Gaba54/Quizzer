@@ -1,20 +1,16 @@
-import React from 'react';
+import 'react-native-gesture-handler';
+import * as React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Home from './screens/home';
-import Quiz from './screens/quiz';
-import Result from './screens/result';
+import MyStack from './navigation';
+import {NavigationContainer} from '@react-navigation/native';
 
-const App = () => {
+export default function App() {
   return (
-    <View style={styles.containter}>
-      <Home />
-      {/* <Quiz/> */}
-      {/* <Result/> */}
-    </View>
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
-};
-
-export default App;
+}
 
 const styles = StyleSheet.create({
   containter: {

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Title from '../components/title';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <View>
       <Title />
@@ -20,7 +20,7 @@ const Home = () => {
       <View>
         <Text>Wpisz swoje imię, aby zacząć przygodę z quizami!</Text>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=> navigation.navigate('Categories')}>
         <Text>Rozpocznij</Text>
       </TouchableOpacity>
     </View>
