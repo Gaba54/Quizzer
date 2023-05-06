@@ -5,7 +5,7 @@ const Result = ({ navigation }) => {
   return (
     <View>
       <View>
-        <Text>Result</Text>
+        <Text>ResultTest</Text>
       </View>
       <View>
         <Text>Result</Text>
