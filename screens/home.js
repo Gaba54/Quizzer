@@ -1,28 +1,32 @@
 import React from 'react';
-import {
-    Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Title from '../components/title';
+import TextBox from '../components/textbox';
 
-const Home = ({ navigation }) => {
+const Home = ({navigation}) => {
   return (
-    <View>
-      <Title />
+    <View style={styles.container}>
       <View style={styles.bannerContainer}>
-      <Image source={require('../components/logo.png')} 
-      style= {styles.banner}
-      resizeMode='contain'/>
+        <Image
+          source={require('../components/logo.png')}
+          style={styles.banner}
+          resizeMode="contain"
+        />
       </View>
-      <View>
-        <Text>Wpisz swoje imię, aby zacząć przygodę z quizami!</Text>
+      <View style={styles.bottomcontainer}>
+        <Text style={styles.text}>
+          Wpisz swoje imię, aby zacząć przygodę z quizami!
+        </Text>
       </View>
-      <TouchableOpacity onPress={()=> navigation.navigate('Categories')}>
-        <Text>Rozpocznij</Text>
-      </TouchableOpacity>
+      <View style={styles.containerfles}>
+      <TextBox style={styles.containterTextbox} />
+      
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Categories')}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Rozpocznij</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -30,12 +34,50 @@ const Home = ({ navigation }) => {
 export default Home;
 
 const styles = StyleSheet.create({
-    banner:{  
-    height: 107,
-    width: 381,
-    },
-    bannerContainer:{
-        justifyContent:'center',
-        alignItems:'center'
-    }
+  banner: {
+    height: 400,
+    width: 400,
+  },
+  bannerContainer: {
+    marginTop:150,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  container: {
+    paddingTop: 40,
+    paddingHorizontal: 20,
+    backgroundColor: '#ffd6ff',
+    height: '100%',
+  },
+  button: {
+    width: '100%',
+    backgroundColor: '#a2d2ff',
+    padding: 20,
+    borderRadius: 16,
+    alignItems: 'center',
+    marginTop:40,
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#4D4D4D',
+  },
+  text: {
+    marginTop:30,
+    fontSize: 20,
+    fontWeight:400,
+    fontFamily: 'Open Sans',
+    alignItems: 'center',
+    color: '#4D4D4D',
+  },
+  bottomcontainer: {
+    flex: 2,
+  },
+  containerfles:{
+    flex:8,
+  },
+  containterTextbox:{
+    marginBottom:20
+  },
 });

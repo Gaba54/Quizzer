@@ -22,4 +22,19 @@ const Result = ({ navigation }) => {
 
 export default Result;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 40,
+    paddingHorizontal: 20,
+    backgroundColor: '#ffd6ff',
+    height: '100%',
+  },
+  banner: {
+    height:300,
+    width:300,
+  },
+  bannerContainer:{
+    justifyContent:'center',
+    alignItems:'center'
+  }
+});
