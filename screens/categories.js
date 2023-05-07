@@ -11,19 +11,21 @@ const fetchCategories = async () => {
 
 const Categories = ({navigation}) => {
   const [categories, setCategories] = useState([]);
+  
   useEffect(() => {
     const fetchCategoriesAsync = async () => {
       const categories = await fetchCategories();
-      console.log(categories);
+      // console.log(categories);
       setCategories(categories);
     };
     fetchCategoriesAsync();
   }, []);
 
-  const renderCategoryItem = ({ item }) => (
+  const renderCategoryItem = ({item}) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('CategoryDescription', { category: item })}
-    >
+      onPress={() =>
+        navigation.navigate('CategoryDescription', {category: item})
+      }>
       <View style={styles.categoryItem}>
         <Text style={styles.categoryName}>{item.name}</Text>
       </View>
@@ -36,11 +38,11 @@ const Categories = ({navigation}) => {
         <Text style={styles.question}>Categories available:</Text>
       </View>
       <FlatList
-      data={categories}
-      renderItem={renderCategoryItem}
-      keyExtractor={item => item.id.toString()}
-      contentContainerStyle={styles.categoryList}
-    />
+        data={categories}
+        renderItem={renderCategoryItem}
+        keyExtractor={item => item.id.toString()}
+        contentContainerStyle={styles.categoryList}
+      />
     </View>
   );
 };
@@ -80,7 +82,6 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 16,
     alignItems: 'center',
-
   },
   categoryName: {
     fontSize: 20,

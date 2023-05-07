@@ -1,25 +1,28 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
-const CategoryDescription = ({navigation}) => {
+const CategoryDescription = ({navigation, route}) => {
+  const { category } = route.params;
+
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <Text style={styles.question}>Category description:</Text>
+        <Text style={styles.question}>{category.name}</Text>
       </View>
       <View style={styles.top}>
-        <Text style={styles.question}>Opis kategoriedsfnjsdfbshbhfsdjb</Text>
+        <Text style={styles.question}>{category.description}</Text>
       </View>
       <View style={styles.options}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Quiz')}>
+          onPress={() => navigation.navigate('Quiz', { category })}>
           <Text style={styles.buttonText}>START</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Categories')}>
-          <Text style={styles.buttonText}>BACK TO CATEGORIES</Text>
+          <Text style={styles.buttonText}>BACK TO LIST</Text>
         </TouchableOpacity>
       </View>
     </View>
