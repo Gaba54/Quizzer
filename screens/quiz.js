@@ -19,6 +19,7 @@ const Quiz = ({navigation, route}) => {
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
   const [isLoading, setisLoading] = useState(false);
+  const [count, setCount] = useState(1);
 
   const getQuiz = async categoryId => {
     setisLoading(true);
@@ -38,6 +39,7 @@ const Quiz = ({navigation, route}) => {
   const handleNextPress = () => {
     setQues(ques + 1);
     setOptions(generateOptionsAndShuffle(questions[ques + 1]));
+    handleIncrement();
   };
 
   const generateOptionsAndShuffle = _question => {
@@ -56,16 +58,22 @@ const Quiz = ({navigation, route}) => {
     if (ques !== 9) {
       setQues(ques + 1);
       setOptions(generateOptionsAndShuffle(questions[ques + 1]));
+      handleIncrement();
     }
     if (ques === 9) {
       handleShowResult();
     }
+    
   };
 
   const handleShowResult = () => {
     navigation.navigate('Result', {
       score: score,
     });
+  };
+
+  const handleIncrement = () => {
+    setCount(count + 1);
   };
 
   return (
@@ -78,7 +86,7 @@ const Quiz = ({navigation, route}) => {
         questions && (
           <View style={styles.parent}>
             <View style={styles.questionCounter}>
-              <Text style={styles.question}>Question X</Text>
+              <Text style={styles.question}>Question {count}</Text>
             </View>
             <View style={styles.top}>
               <Text style={styles.question}>
@@ -213,9 +221,9 @@ const styles = StyleSheet.create({
   parent: {
     height: '100%',
   },
-  loadingContainer:{
+  loadingContainer: {
     display: 'flex',
-    justifyContent:'center',
-    alignSelf:'center'
+    justifyContent: 'center',
+    alignSelf: 'center',
   },
 });
