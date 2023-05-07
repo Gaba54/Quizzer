@@ -1,11 +1,14 @@
 <h1 align="center">
-  <a href="https://github.com/Gaba54/Quizzer.git">
-    Quizzer
+<p align="center">
+  <a >
+    <img src="https://github.com/Gaba54/Quizzer/blob/main/components/logo.png" />
   </a>
+</p>
+
 </h1>
 
 <p align="center">
-  Quizzer is a free and open-source quiz application created for academic purposes.
+  Quizzer (or QUIZLANDIA) is a free and open-source quiz application created for academic purposes.
 </p>
 
 ## Built with
