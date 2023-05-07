@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffd6ff',
     padding: 20,
     borderRadius: 16,
-    marginTop: 40,
+    marginTop: 20,
     alignItems: 'center',
   },
   resultText: {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 16,
     alignSelf: 'center',
-    marginTop: 40,
+    marginTop: 25,
     maxWidth: '50%',
   },
   buttonText: {

@@ -170,17 +170,14 @@ const styles = StyleSheet.create({
   },
   bottom: {
     marginBottom: 12,
-    paddingVertical: 30,
-    marginVertical: 16,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    flexDirection:'column',
+    alignSelf: 'center',
+    marginTop: 40,
   },
   button: {
     backgroundColor: '#ffd6ff',
     padding: 16,
-    paddingHorizontal: 16,
+    paddingHorizontal:50,
     borderRadius: 16,
     alignItems: 'center',
     marginTop: 40,
@@ -210,6 +207,8 @@ const styles = StyleSheet.create({
   options: {
     flex: 1,
     marginVertical: 16,
+    marginBottom:30,
+  
   },
   optionButton: {
     paddingVertical: 12,
@@ -217,6 +216,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#a2d2ff',
     paddingHorizontal: 12,
     borderRadius: 12,
+
   },
   parent: {
     height: '100%',
