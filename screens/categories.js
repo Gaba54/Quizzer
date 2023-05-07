@@ -11,12 +11,15 @@ const fetchCategories = async () => {
 
 const Categories = ({navigation}) => {
   const [categories, setCategories] = useState([]);
-  
+  const [isLoading, setisLoading] = useState(false);
+
   useEffect(() => {
     const fetchCategoriesAsync = async () => {
+      setisLoading(true);
       const categories = await fetchCategories();
       // console.log(categories);
       setCategories(categories);
+      setisLoading(false);
     };
     fetchCategoriesAsync();
   }, []);
@@ -37,12 +40,18 @@ const Categories = ({navigation}) => {
       <View style={styles.top}>
         <Text style={styles.question}>Categories available:</Text>
       </View>
-      <FlatList
-        data={categories}
-        renderItem={renderCategoryItem}
-        keyExtractor={item => item.id.toString()}
-        contentContainerStyle={styles.categoryList}
-      />
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>LOADING...</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={categories}
+          renderItem={renderCategoryItem}
+          keyExtractor={item => item.id.toString()}
+          contentContainerStyle={styles.categoryList}
+        />
+      )}
     </View>
   );
 };
@@ -88,5 +97,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#4D4D4D',
     alignItems: 'center',
+  },
+  loadingContainer:{
+    display: 'flex',
+    justifyContent:'center',
+    alignSelf:'center'
+  },
+  loadingText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#4D4D4D',
   },
 });

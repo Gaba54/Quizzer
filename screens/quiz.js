@@ -18,14 +18,17 @@ const Quiz = ({navigation, route}) => {
   const [ques, setQues] = useState(0);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
+  const [isLoading, setisLoading] = useState(false);
 
   const getQuiz = async categoryId => {
+    setisLoading(true);
     const url = `https://opentdb.com/api.php?amount=10&category=${categoryId}&type=multiple&encode=url3986`;
     const res = await fetch(url);
     const data = await res.json();
     setQuestions(data.results);
     console.log(data.results[0]);
     setOptions(generateOptionsAndShuffle(data.results[0]));
+    setisLoading(false);
   };
 
   useEffect(() => {
@@ -40,7 +43,7 @@ const Quiz = ({navigation, route}) => {
   const generateOptionsAndShuffle = _question => {
     const options = [..._question.incorrect_answers];
     options.push(_question.correct_answer);
-    console.log(options, "before");
+    console.log(options, 'before');
     shuffleArray(options);
     // console.log(options, "after")
     return options;
@@ -67,65 +70,73 @@ const Quiz = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      {questions && (
-        <View style={styles.parent}>
-          <View style={styles.questionCounter}>
-            <Text style={styles.question}>Question X</Text>
-          </View>
-          <View style={styles.top}>
-            <Text style={styles.question}>
-              {decodeURIComponent(questions[ques].question)}
-            </Text>
-          </View>
-          <View style={styles.options}>
-            <TouchableOpacity
-              style={styles.optionButton}
-              onPress={() => handleSelectedOption(options[0])}>
-              <Text style={styles.option}>
-                {decodeURIComponent(options[0])}
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <Text style={styles.buttonText}>LOADING...</Text>
+        </View>
+      ) : (
+        questions && (
+          <View style={styles.parent}>
+            <View style={styles.questionCounter}>
+              <Text style={styles.question}>Question X</Text>
+            </View>
+            <View style={styles.top}>
+              <Text style={styles.question}>
+                {decodeURIComponent(questions[ques].question)}
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.optionButton}
-              onPress={() => handleSelectedOption(options[1])}>
-              <Text style={styles.option}>
-                {decodeURIComponent(options[1])}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.optionButton}
-              onPress={() => handleSelectedOption(options[2])}>
-              <Text style={styles.option}>
-                {decodeURIComponent(options[2])}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.optionButton}
-              onPress={() => handleSelectedOption(options[3])}>
-              <Text style={styles.option}>
-                {decodeURIComponent(options[3])}
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.bottom}>
-            {/* <TouchableOpacity style={styles.button}>
+            </View>
+            <View style={styles.options}>
+              <TouchableOpacity
+                style={styles.optionButton}
+                onPress={() => handleSelectedOption(options[0])}>
+                <Text style={styles.option}>
+                  {decodeURIComponent(options[0])}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.optionButton}
+                onPress={() => handleSelectedOption(options[1])}>
+                <Text style={styles.option}>
+                  {decodeURIComponent(options[1])}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.optionButton}
+                onPress={() => handleSelectedOption(options[2])}>
+                <Text style={styles.option}>
+                  {decodeURIComponent(options[2])}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.optionButton}
+                onPress={() => handleSelectedOption(options[3])}>
+                <Text style={styles.option}>
+                  {decodeURIComponent(options[3])}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottom}>
+              {/* <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>PREV</Text>
             </TouchableOpacity> */}
-            {ques !== 9 && (
-              <TouchableOpacity style={styles.button} onPress={handleNextPress}>
-                <Text style={styles.buttonText}> SKIP </Text>
-              </TouchableOpacity>
-            )}
+              {ques !== 9 && (
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleNextPress}>
+                  <Text style={styles.buttonText}> SKIP </Text>
+                </TouchableOpacity>
+              )}
 
-            {ques == 9 && (
-              <TouchableOpacity
-                style={styles.button}
-                onPress={handleShowResult}>
-                <Text style={styles.buttonText}>SHOW RESULTS</Text>
-              </TouchableOpacity>
-            )}
+              {ques == 9 && (
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleShowResult}>
+                  <Text style={styles.buttonText}>SHOW RESULTS</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
-        </View>
+        )
       )}
     </View>
   );
@@ -201,5 +212,10 @@ const styles = StyleSheet.create({
   },
   parent: {
     height: '100%',
+  },
+  loadingContainer:{
+    display: 'flex',
+    justifyContent:'center',
+    alignSelf:'center'
   },
 });
