@@ -1,21 +1,46 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, FlatList, Text, View, TouchableOpacity} from 'react-native';
+import {useEffect} from 'react';
+import {useState} from 'react';
+
+const fetchCategories = async () => {
+  const response = await fetch('https://opentdb.com/api_category.php');
+  const data = await response.json();
+  return data.trivia_categories;
+};
 
 const Categories = ({navigation}) => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchCategoriesAsync = async () => {
+      const categories = await fetchCategories();
+      console.log(categories);
+      setCategories(categories);
+    };
+    fetchCategoriesAsync();
+  }, []);
+
+  const renderCategoryItem = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('CategoryDescription', { category: item })}
+    >
+      <View style={styles.categoryItem}>
+        <Text style={styles.categoryName}>{item.name}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <Text  style={styles.question} >Categories available:</Text>
+        <Text style={styles.question}>Categories available:</Text>
       </View>
-      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate('CategoryDescription')}>
-        <Text style={styles.option}>Niebieski</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate('CategoryDescription')}>
-        <Text style={styles.option}>Zielony</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate('CategoryDescription')}>
-        <Text style={styles.option}>Czerwony</Text>
-      </TouchableOpacity>
+      <FlatList
+      data={categories}
+      renderItem={renderCategoryItem}
+      keyExtractor={item => item.id.toString()}
+      contentContainerStyle={styles.categoryList}
+    />
     </View>
   );
 };
@@ -28,14 +53,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: 'white',
     height: '100%',
-  },
-  optionButton: {
-    width: '100%',
-    backgroundColor: '#a2d2ff',
-    padding: 20,
-    borderRadius: 16,
-    alignItems: 'center',
-    marginTop:40,
   },
   question: {
     fontSize: 26,
@@ -52,9 +69,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 40,
   },
-  option: {
-    fontSize: 18,
-    fontWeight: '500',
+  categoryList: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+  },
+  categoryItem: {
+    marginVertical: 16,
+    width: '100%',
+    backgroundColor: '#a2d2ff',
+    padding: 20,
+    borderRadius: 16,
+    alignItems: 'center',
+
+  },
+  categoryName: {
+    fontSize: 20,
+    fontWeight: '600',
     color: '#4D4D4D',
+    alignItems: 'center',
   },
 });
