@@ -1,11 +1,11 @@
 <h1 align="center">
-  <a href="https://safdarjamal.github.io/quiz-app/">
+  <a href="https://github.com/Gaba54/Quizzer.git">
     Quizzer
   </a>
 </h1>
 
 <p align="center">
-  Quizzer is a free and open-source quiz application created for academic purpose.
+  Quizzer is a free and open-source quiz application created for academic purposes.
 </p>
 
 ## Built with
