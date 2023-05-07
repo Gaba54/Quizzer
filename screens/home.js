@@ -1,6 +1,5 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Title from '../components/title';
 import TextBox from '../components/textbox';
 
 const Home = ({navigation}) => {

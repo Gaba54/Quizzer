@@ -18,7 +18,7 @@ const Quiz = ({navigation, route}) => {
   const [ques, setQues] = useState(0);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
-  
+
   const getQuiz = async categoryId => {
     const url = `https://opentdb.com/api.php?amount=10&category=${categoryId}&type=multiple&encode=url3986`;
     const res = await fetch(url);
@@ -40,7 +40,7 @@ const Quiz = ({navigation, route}) => {
   const generateOptionsAndShuffle = _question => {
     const options = [..._question.incorrect_answers];
     options.push(_question.correct_answer);
-    // console.log(options, "before");
+    console.log(options, "before");
     shuffleArray(options);
     // console.log(options, "after")
     return options;
@@ -54,10 +54,15 @@ const Quiz = ({navigation, route}) => {
       setQues(ques + 1);
       setOptions(generateOptionsAndShuffle(questions[ques + 1]));
     }
+    if (ques === 9) {
+      handleShowResult();
+    }
   };
 
   const handleShowResult = () => {
-    navigation.navigate('Result');
+    navigation.navigate('Result', {
+      score: score,
+    });
   };
 
   return (
@@ -65,7 +70,7 @@ const Quiz = ({navigation, route}) => {
       {questions && (
         <View style={styles.parent}>
           <View style={styles.questionCounter}>
-            <Text style={styles.question}>Pytanie X</Text>
+            <Text style={styles.question}>Question X</Text>
           </View>
           <View style={styles.top}>
             <Text style={styles.question}>
@@ -103,12 +108,12 @@ const Quiz = ({navigation, route}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.bottom}>
-            <TouchableOpacity style={styles.button}>
+            {/* <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>PREV</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             {ques !== 9 && (
               <TouchableOpacity style={styles.button} onPress={handleNextPress}>
-                <Text style={styles.buttonText}>SKIP</Text>
+                <Text style={styles.buttonText}> SKIP </Text>
               </TouchableOpacity>
             )}
 
@@ -144,18 +149,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 40,
   },
-  options: {
-    marginVertical: 16,
-  },
   bottom: {
     marginBottom: 12,
-    paddingVertical: 16,
+    paddingVertical: 30,
+    marginVertical: 16,
     justifyContent: 'space-between',
     flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   button: {
     backgroundColor: '#ffd6ff',
-    padding: 12,
+    padding: 16,
     paddingHorizontal: 16,
     borderRadius: 16,
     alignItems: 'center',
@@ -164,14 +169,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#4D4D4D',
-  },
-  text: {
-    marginTop: 30,
-    fontSize: 20,
-    fontWeight: 400,
-    fontFamily: 'Open Sans',
-    alignItems: 'center',
     color: '#4D4D4D',
   },
   question: {
