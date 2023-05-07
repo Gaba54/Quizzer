@@ -15,7 +15,7 @@ const Home = ({navigation}) => {
       </View>
       <View style={styles.bottomcontainer}>
         <Text style={styles.text}>
-          Wpisz swoje imię, aby zacząć przygodę z quizami!
+          Enter your name to play with quizzes!
         </Text>
       </View>
       <View style={styles.containerfles}>
@@ -24,7 +24,7 @@ const Home = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Categories')}
           style={styles.button}>
-          <Text style={styles.buttonText}>Rozpocznij</Text>
+          <Text style={styles.buttonText}>Start</Text>
         </TouchableOpacity>
       </View>
     </View>

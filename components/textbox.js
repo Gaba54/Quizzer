@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
 
 const TextBox = () => {
-  const [text, onChangeText] = React.useState('Twoje imię');
+  const [text, onChangeText] = React.useState('Your name');
   return (
     <SafeAreaView>
       <View style={styles.container}>

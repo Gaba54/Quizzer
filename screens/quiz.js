@@ -41,15 +41,15 @@ const Quiz = ({navigation}) => {
           </View>
           <View style={styles.bottom}>
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>POMIŃ</Text>
+              <Text style={styles.buttonText}>SKIP</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>ZAKOŃCZ</Text>
+              <Text style={styles.buttonText}>END</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('Result')}>
-              <Text style={styles.buttonText}>NASTĘPNY</Text>
+              <Text style={styles.buttonText}>NEXT</Text>
             </TouchableOpacity>
           </View>
         </View>
