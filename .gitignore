@@ -63,4 +63,4 @@ yarn-error.log
 tsconfig.json
 .eslintrc.js
 
-bundle/
+.bundle/
