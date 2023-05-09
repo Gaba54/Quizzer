@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
 
 const TextBox = () => {
-  const [text, onChangeText] = React.useState('Your name');
+  const [text, onChangeText] = React.useState('');
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -10,6 +10,7 @@ const TextBox = () => {
         style={styles.input}
         onChangeText={onChangeText}
         value={text}
+        placeholder="Your name"
       />
       </View>
     </SafeAreaView>
