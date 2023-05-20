@@ -13,7 +13,9 @@ const shuffleArray = array => {
 
 const Quiz = ({navigation, route}) => {
   const {category} = route.params;
+  const {checked} = route.params;
   const categoryId = category.id;
+  const categoryDifficulty = category.difficulty;
   const [questions, setQuestions] = useState();
   const [ques, setQues] = useState(0);
   const [options, setOptions] = useState([]);
@@ -23,7 +25,7 @@ const Quiz = ({navigation, route}) => {
 
   const getQuiz = async categoryId => {
     setisLoading(true);
-    const url = `https://opentdb.com/api.php?amount=10&category=${categoryId}&type=multiple&encode=url3986`;
+    const url = `https://opentdb.com/api.php?amount=10&category=${categoryId}&difficulty=${checked}&type=multiple&encode=url3986`;
     const res = await fetch(url);
     const data = await res.json();
     setQuestions(data.results);

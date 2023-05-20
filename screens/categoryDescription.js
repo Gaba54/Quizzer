@@ -1,22 +1,39 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { RadioButton } from 'react-native-paper';
 
 const CategoryDescription = ({navigation, route}) => {
   const { category } = route.params;
+  const [checked, setChecked] = React.useState('easy');
+  const difficulty = [
+    { value: 'easy' },
+    { value: 'medium' },
+    { value: 'hard' },
+  ];
 
   return (
     <View style={styles.container}>
       <View style={styles.top}>
         <Text style={styles.question}>{category.name}</Text>
       </View>
-      <View style={styles.top}>
-        <Text style={styles.question}>{category.description}</Text>
+      <View style={styles.top2}>
+      <Text style={styles.difficultyText}>Difficulty level:</Text>
+        {difficulty.map((option) => (
+          <View style={styles.radioButtonContainer} key={option.value}>
+            <RadioButton
+              value={option.value}
+              status={checked === option.value ? 'checked' : 'unchecked'}
+              onPress={() => setChecked(option.value)}
+            />
+            <Text style={styles.radioButtonText}>{option.value}</Text>
+          </View>
+        ))}
       </View>
       <View style={styles.options}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Quiz', { category })}>
+          onPress={() => navigation.navigate('Quiz', { category, checked})}>
           <Text style={styles.buttonText}>START</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -70,4 +87,29 @@ const styles = StyleSheet.create({
     flex: 1,
     marginVertical: 16,
   },
+  radioButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  radioButtonText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#4D4D4D',
+    alignItems: 'center',
+  },
+  top2: {
+    marginVertical: 16,
+    width: '100%',
+    backgroundColor: '#ffd6ff',
+    padding: 20,
+    borderRadius: 16,
+    marginTop: 40,
+  },
+  difficultyText:{
+    fontSize: 22,
+    fontWeight: '600',
+    color: '#4D4D4D',
+    marginBottom:10,
+  }
 });

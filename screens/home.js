@@ -4,29 +4,29 @@ import TextBox from '../components/textbox';
 
 const Home = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.bannerContainer}>
-        <Image
-          source={require('../components/logo.png')}
-          style={styles.banner}
-          resizeMode="contain"
-        />
-      </View>
-      <View style={styles.bottomcontainer}>
-        <Text style={styles.text}>
-          Enter your name to play with quizzes!
-        </Text>
-      </View>
-      <View style={styles.containerfles}>
-      <TextBox style={styles.containterTextbox} />
-      
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Categories')}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Start</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+        <View style={styles.container}>
+          <View style={styles.bannerContainer}>
+            <Image
+              source={require('../components/logo.png')}
+              style={styles.banner}
+              resizeMode="contain"
+            />
+          </View>
+          <View style={styles.bottomcontainer}>
+            <Text style={styles.text}>
+              Enter your name to play with quizzes!
+            </Text>
+          </View>
+          <View style={styles.containerfles}>
+          <TextBox style={styles.containterTextbox} />
+          
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Categories')}
+              style={styles.button}>
+              <Text style={styles.buttonText}>Start</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
   );
 };
 

@@ -17,7 +17,6 @@ const Categories = ({navigation}) => {
     const fetchCategoriesAsync = async () => {
       setisLoading(true);
       const categories = await fetchCategories();
-      // console.log(categories);
       setCategories(categories);
       setisLoading(false);
     };
