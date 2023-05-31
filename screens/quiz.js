@@ -11,6 +11,8 @@ const shuffleArray = array => {
   }
 };
 
+const TIME_FOR_QUESTION = 20;
+
 const Quiz = ({navigation, route}) => {
   const {category} = route.params;
   const {checked} = route.params;
@@ -22,6 +24,24 @@ const Quiz = ({navigation, route}) => {
   const [score, setScore] = useState(0);
   const [isLoading, setisLoading] = useState(false);
   const [count, setCount] = useState(1);
+  const [timeLeft, setTimeLeft] = useState(TIME_FOR_QUESTION);
+
+  useEffect(() => {
+    let interval;
+    if (timeLeft !== 0) {
+      interval = setInterval(() => {
+        setTimeLeft(seconds => seconds - 1);
+      }, 1000);
+    } else {
+      if (ques === 9) {
+        handleShowResult();
+      } else {
+        handleNextPress();
+      }
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  });
 
   const getQuiz = async categoryId => {
     setisLoading(true);
@@ -42,6 +62,7 @@ const Quiz = ({navigation, route}) => {
     setQues(ques + 1);
     setOptions(generateOptionsAndShuffle(questions[ques + 1]));
     handleIncrement();
+    setTimeLeft(TIME_FOR_QUESTION);
   };
 
   const generateOptionsAndShuffle = _question => {
@@ -65,7 +86,7 @@ const Quiz = ({navigation, route}) => {
     if (ques === 9) {
       handleShowResult();
     }
-    
+    setTimeLeft(TIME_FOR_QUESTION);
   };
 
   const handleShowResult = () => {
@@ -88,6 +109,10 @@ const Quiz = ({navigation, route}) => {
         questions && (
           <View style={styles.parent}>
             <View style={styles.questionCounter}>
+              <View style={styles.timer}>
+                <Text style={styles.timerText}>{timeLeft} s</Text>
+              </View>
+
               <Text style={styles.question}>Question {count}</Text>
             </View>
             <View style={styles.top}>
@@ -172,14 +197,14 @@ const styles = StyleSheet.create({
   },
   bottom: {
     marginBottom: 12,
-    flexDirection:'column',
+    flexDirection: 'column',
     alignSelf: 'center',
     marginTop: 40,
   },
   button: {
     backgroundColor: '#ffd6ff',
     padding: 16,
-    paddingHorizontal:50,
+    paddingHorizontal: 50,
     borderRadius: 16,
     alignItems: 'center',
     marginTop: 40,
@@ -209,8 +234,7 @@ const styles = StyleSheet.create({
   options: {
     flex: 1,
     marginVertical: 16,
-    marginBottom:30,
-  
+    marginBottom: 30,
   },
   optionButton: {
     paddingVertical: 12,
@@ -218,7 +242,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#a2d2ff',
     paddingHorizontal: 12,
     borderRadius: 12,
-
   },
   parent: {
     height: '100%',
@@ -227,5 +250,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignSelf: 'center',
+  },
+  timer: {
+    alignSelf: 'flex-end',
+  },
+  timerText: {
+    fontSize: 20,
+    fontWeight: 600,
+    color: '#4D4D4D',
   },
 });
