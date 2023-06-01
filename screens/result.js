@@ -13,20 +13,22 @@ const Result = ({navigation, route}) => {
             <Text style={styles.resultText}>Your score:</Text>
           </View>
           <View style={styles.top}>
-          <Text style={styles.scoreText}>{score}/10</Text>
-          {score < 5 && (
+            <Text style={styles.scoreText}>{score}/10</Text>
+            {score < 5 && (
               <Image
-              source={require('../components/looser.jpg')}
-              style={styles.banner}
-              resizeMode="contain"
-            />
+                source={require('../components/looser.jpg')}
+                style={styles.banner}
+                resizeMode="contain"
+                testID="looser-image"
+              />
             )}
-          {score >= 5 && (
+            {score >= 5 && (
               <Image
-              source={require('../components/winner.jpg')}
-              style={styles.banner}
-              resizeMode="contain"
-            />
+                source={require('../components/winner.jpg')}
+                style={styles.banner}
+                resizeMode="contain"
+                testID="winner-image"
+              />
             )}
           </View>
           <TouchableOpacity
@@ -71,7 +73,6 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: '600',
     color: '#4D4D4D',
-    
   },
   button: {
     backgroundColor: '#a2d2ff',
@@ -90,11 +91,11 @@ const styles = StyleSheet.create({
   resultContainer: {
     alignItems: 'center',
   },
-  scoreText:{
+  scoreText: {
     fontSize: 26,
     fontWeight: '600',
     color: '#4D4D4D',
     alignItems: 'center',
     marginBottom: 14,
-  }
+  },
 });

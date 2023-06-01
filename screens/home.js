@@ -4,29 +4,30 @@ import TextBox from '../components/textbox';
 
 const Home = ({navigation}) => {
   return (
-        <View style={styles.container}>
-          <View style={styles.bannerContainer}>
-            <Image
-              source={require('../components/logo.png')}
-              style={styles.banner}
-              resizeMode="contain"
-            />
-          </View>
-          <View style={styles.bottomcontainer}>
-            <Text style={styles.text}>
-              Enter your name to play with quizzes!
-            </Text>
-          </View>
-          <View style={styles.containerfles}>
-          <TextBox style={styles.containterTextbox} />
-          
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Categories')}
-              style={styles.button}>
-              <Text style={styles.buttonText}>Start</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+    <View style={styles.container}>
+      <View style={styles.bannerContainer}>
+        <Image
+          source={require('../components/logo.png')}
+          style={styles.banner}
+          resizeMode="contain"
+          testID={'banner'}
+        />
+      </View>
+      <View style={styles.bottomcontainer}>
+        <Text style={styles.text}>Enter your name to play with quizzes!</Text>
+      </View>
+      <View style={styles.containerfles}>
+        <TextBox style={styles.containterTextbox} />
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Categories')}
+          style={styles.button}>
+          <Text style={styles.buttonText} testID="start-button">
+            Start
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     width: 400,
   },
   bannerContainer: {
-    marginTop:150,
+    marginTop: 150,
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 16,
     alignItems: 'center',
-    marginTop:40,
+    marginTop: 40,
   },
   buttonText: {
     fontSize: 20,
@@ -63,9 +64,9 @@ const styles = StyleSheet.create({
     color: '#4D4D4D',
   },
   text: {
-    marginTop:30,
+    marginTop: 30,
     fontSize: 20,
-    fontWeight:400,
+    fontWeight: 400,
     fontFamily: 'Open Sans',
     alignItems: 'center',
     color: '#4D4D4D',
@@ -73,10 +74,10 @@ const styles = StyleSheet.create({
   bottomcontainer: {
     flex: 2,
   },
-  containerfles:{
-    flex:8,
+  containerfles: {
+    flex: 8,
   },
-  containterTextbox:{
-    marginBottom:20
+  containterTextbox: {
+    marginBottom: 20,
   },
 });

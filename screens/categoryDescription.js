@@ -1,16 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { RadioButton } from 'react-native-paper';
+import {useRoute} from '@react-navigation/native';
+import {RadioButton} from 'react-native-paper';
 
 const CategoryDescription = ({navigation, route}) => {
-  const { category } = route.params;
+  const {category} = route.params;
   const [checked, setChecked] = React.useState('easy');
-  const difficulty = [
-    { value: 'easy' },
-    { value: 'medium' },
-    { value: 'hard' },
-  ];
+  const difficulty = [{value: 'easy'}, {value: 'medium'}, {value: 'hard'}];
 
   return (
     <View style={styles.container}>
@@ -18,13 +14,14 @@ const CategoryDescription = ({navigation, route}) => {
         <Text style={styles.question}>{category.name}</Text>
       </View>
       <View style={styles.top2}>
-      <Text style={styles.difficultyText}>Difficulty level:</Text>
-        {difficulty.map((option) => (
+        <Text style={styles.difficultyText}>Difficulty level:</Text>
+        {difficulty.map(option => (
           <View style={styles.radioButtonContainer} key={option.value}>
             <RadioButton
               value={option.value}
               status={checked === option.value ? 'checked' : 'unchecked'}
               onPress={() => setChecked(option.value)}
+              testID={`radioButton-${option.value}`}
             />
             <Text style={styles.radioButtonText}>{option.value}</Text>
           </View>
@@ -33,7 +30,7 @@ const CategoryDescription = ({navigation, route}) => {
       <View style={styles.options}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Quiz', { category, checked})}>
+          onPress={() => navigation.navigate('Quiz', {category, checked})}>
           <Text style={styles.buttonText}>START</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -106,10 +103,10 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginTop: 40,
   },
-  difficultyText:{
+  difficultyText: {
     fontSize: 22,
     fontWeight: '600',
     color: '#4D4D4D',
-    marginBottom:10,
-  }
+    marginBottom: 10,
+  },
 });

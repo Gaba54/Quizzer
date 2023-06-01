@@ -100,7 +100,7 @@ const Quiz = ({navigation, route}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="quiz-container">
       {isLoading ? (
         <View style={styles.loadingContainer}>
           <Text style={styles.buttonText}>LOADING...</Text>
