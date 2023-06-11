@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useEffect} from 'react';
 import {useState} from 'react';
 
-//adding shuffle (randomize) to set answers in random positions
+// funkcja majaca na celu wyswietlanie odpowiedzi w randomowych pozycjach
 const shuffleArray = array => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -58,6 +58,7 @@ const Quiz = ({navigation, route}) => {
     getQuiz(categoryId);
   }, []);
 
+
   const handleNextPress = () => {
     setQues(ques + 1);
     setOptions(generateOptionsAndShuffle(questions[ques + 1]));
@@ -65,15 +66,17 @@ const Quiz = ({navigation, route}) => {
     setTimeLeft(TIME_FOR_QUESTION);
   };
 
+  //funkcja do generowania i zwracania odpowiedzi po randomize
   const generateOptionsAndShuffle = _question => {
     const options = [..._question.incorrect_answers];
     options.push(_question.correct_answer);
-    console.log(options, 'before');
+    //console.log(options, 'before');
     shuffleArray(options);
     // console.log(options, "after")
     return options;
   };
-
+//funkcja ktora wywoluje sie wraz z wybraniem odpowiedzi
+//nastepuje tu dodawanie albo odejmowanie punktow
   const handleSelectedOption = _option => {
     if (_option === questions[ques].correct_answer) {
       setScore(score + 1);
@@ -89,12 +92,14 @@ const Quiz = ({navigation, route}) => {
     setTimeLeft(TIME_FOR_QUESTION);
   };
 
+  //wyswietlanie nastepnej strony Result
   const handleShowResult = () => {
     navigation.navigate('Result', {
       score: score,
     });
   };
 
+  //funckja do inkrementacji
   const handleIncrement = () => {
     setCount(count + 1);
   };

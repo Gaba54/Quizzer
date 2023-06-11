@@ -3,6 +3,7 @@ import {StyleSheet, FlatList, Text, View, TouchableOpacity} from 'react-native';
 import {useEffect} from 'react';
 import {useState} from 'react';
 
+//funkcja fetchujaca kategorie
 const fetchCategories = async () => {
   const response = await fetch('https://opentdb.com/api_category.php');
   const data = await response.json();
@@ -18,11 +19,13 @@ const Categories = ({navigation}) => {
       setisLoading(true);
       const categories = await fetchCategories();
       setCategories(categories);
+      // isLoading to loader ktory wyswietla sie zanim aplikacja zdazy wyswietlic dostepne kategorie
       setisLoading(false);
     };
     fetchCategoriesAsync();
   }, []);
 
+  //funkcja do wyswietlania kategorii 
   const renderCategoryItem = ({item}) => (
     <TouchableOpacity
       onPress={() =>

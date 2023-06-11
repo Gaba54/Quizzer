@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {RadioButton} from 'react-native-paper';
 
+//Za pomoca checked wyznaczany jest poziom trudnosci w radioButtonach
 const CategoryDescription = ({navigation, route}) => {
   const {category} = route.params;
   const [checked, setChecked] = React.useState('easy');
